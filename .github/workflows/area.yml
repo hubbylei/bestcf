@@ -1,0 +1,38 @@
+name: Area DNS
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'
+
+jobs:
+  update-dns:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@main
+
+    - name: Set up Python
+      uses: actions/setup-python@main
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Run script
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID_1 }}
+        CLOUDFLARE_ZONE_NAME: ${{secrets.CLOUDFLARE_ZONE_NAME}}
+      run: |
+        python .github/workflows/area.py
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        retain_days: 0
+        keep_minimum_runs: 5

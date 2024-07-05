@@ -1,0 +1,40 @@
+name: "Auto Update IP"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+env:
+  TZ: Asia/Shanghai
+
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Get bestcf.txt
+        run: |
+          echo Get bestcf
+          curl -s https://raw.githubusercontent.com/ymyuuu/IPDB/main/bestcf.txt -o ${GITHUB_WORKSPACE}/bestcf.txt
+
+      - name: Creat Message
+        id: msg
+        run: |
+            echo "commit_message=Update bestcf.txt - $(date +"%Y-%m-%d %H:%M:%S")" >> "$GITHUB_OUTPUT"
+ 
+      - name: Apply IP Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+         commit_message: ${{ steps.msg.outputs.commit_message }}
+         branch: master
+         commit_user_name: hubbylei
+         commit_user_email: ${{ secrets.EMAIL }}
+         commit_author: hubbylei <${{ secrets.EMAIL }}>
+
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          retain_days: 0
+          keep_minimum_runs: 5
