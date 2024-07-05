@@ -28,7 +28,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
          commit_message: ${{ steps.msg.outputs.commit_message }}
-         branch: master
+         branch: main
          commit_user_name: hubbylei
          commit_user_email: ${{ secrets.EMAIL }}
          commit_author: hubbylei <${{ secrets.EMAIL }}>
