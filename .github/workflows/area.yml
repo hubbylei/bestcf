@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '*/10 * * * *'
+env:
+  TZ: Asia/Shanghai
+
 
 jobs:
   update-dns:
