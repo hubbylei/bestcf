@@ -51,9 +51,8 @@ try:
 
     with open('ip.txt', 'r') as file:
         lines = file.readlines()
-    new_ip_list = lines.strip().split("\n")
 
-    for new_ip in new_ip_list:
+    for new_ip in lines:
         create_dns_record(new_ip)
 
     print(f"Successfully updated {name} DNS records")
