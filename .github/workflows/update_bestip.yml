@@ -24,7 +24,7 @@ jobs:
       - name: Creat Message
         id: msg
         run: |
-            echo "commit_message=Update bestcf.txt - $(date +"%Y-%m-%d %H:%M:%S")" >> "$GITHUB_OUTPUT"
+            echo "commit_message=Update $(date +"%Y-%m-%d %H:%M:%S")" >> "$GITHUB_OUTPUT"
  
       - name: Apply IP Changes
         uses: stefanzweifel/git-auto-commit-action@v5
