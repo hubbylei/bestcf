@@ -1,12 +1,9 @@
 name: BestProxy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - bestproxy.txt
   workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'
 
 jobs:
   update_dns:
