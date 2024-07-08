@@ -50,7 +50,7 @@ try:
     print(f"Successfully deleted records with name {name}, updating DNS records now")
 
     with open('ip.txt', 'r') as file:
-        lines = file.readlines()
+        new_ip = file.readlines()
     create_dns_record(new_ip)
 
     print(f"Successfully updated {name} DNS records")
