@@ -14,10 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
-      - name: Get bestcf.txt
+      - name: Get IPS
         run: |
           echo Get bestcf
           curl -s https://raw.githubusercontent.com/ymyuuu/IPDB/main/bestcf.txt -o ${GITHUB_WORKSPACE}/bestcf.txt
+          echo Get bestproxy
           curl -s https://raw.githubusercontent.com/hubbylei/IPDB/main/bestproxy.txt -o ${GITHUB_WORKSPACE}/bestproxy.txt
 
       - name: Creat Message

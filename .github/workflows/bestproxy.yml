@@ -45,4 +45,4 @@ jobs:
       uses: Mattraks/delete-workflow-runs@v2
       with:
         retain_days: 0
-        keep_minimum_runs: 1
+        keep_minimum_runs: 5
