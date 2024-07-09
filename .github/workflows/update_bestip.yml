@@ -17,9 +17,9 @@ jobs:
       - name: Get IPS
         run: |
           echo Get bestcf
-          curl -s https://ipdb.api.030101.xyz/?type=bestcf -o ${GITHUB_WORKSPACE}/bestcf.txt
+          curl -s https://raw.githubusercontent.com/ymyuuu/IPDB/main/bestcf.txt -o ${GITHUB_WORKSPACE}/bestcf.txt
           echo Get bestproxy
-          curl -s https://ipdb.api.030101.xyz/?type=bestproxy -o ${GITHUB_WORKSPACE}/bestproxy.txt
+          curl -s https://raw.githubusercontent.com/hubbylei/IPDB/main/bestproxy.txt -o ${GITHUB_WORKSPACE}/bestproxy.txt
 
       - name: Creat Message
         id: msg
