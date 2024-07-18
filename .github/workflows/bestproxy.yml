@@ -2,8 +2,8 @@ name: BestProxy
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/10 * * * *'
+  # schedule:
+    # - cron: '*/10 * * * *'
 
 jobs:
   update_dns:
@@ -19,6 +19,7 @@ jobs:
         python-version: 3.8
 
     - name: Test IP
+      shell: cmd
       run: |
         cd ${{ github.workspace }}
         .\curl.exe -# https://zip.baipiao.eu.org -o txt.zip
