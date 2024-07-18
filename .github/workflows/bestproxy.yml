@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_dns:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout Repository
@@ -20,10 +20,11 @@ jobs:
 
     - name: Test IP
       run: |
-        chmod a+x ./CloudflareST
-        ./CloudflareST -n 500 -sl 5 -tl 600 -tp 443 -tlr 0 -p 0 -dn 5 -f bestproxy.txt -url https://${{ secrets.TEST_URL }} -o result-443.txt
-        cat result-443.txt
-        awk -F "," 'NR==2 {print $1}' result-443.txt > ip.txt
+        curl -# https://zip.baipiao.eu.org -o txt.zip
+        7za x txt.zip -otxt -y
+        copy txt\*-1-443.txt txt\ip.txt> nul 2>&1
+        iptest -file=txt\ip.txt -port=443 -tls=true -max=100 -outfile=result-443.txt -speedtest=1
+        for /f "skip=1 tokens=1 delims=," %%a in (result-443.txt) do echo %%a>>ip.txt
 
     - name: Install Dependencies
       run: |

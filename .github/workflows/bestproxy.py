@@ -51,10 +51,7 @@ try:
 
     with open('ip.txt', 'r') as file:
         lines = file.readlines()
-
-    for new_ip in lines:
-        create_dns_record(new_ip)
-
+    create_dns_record(lines[0])
     print(f"Successfully updated {name} DNS records")
 except Exception as e:
     print(f"Exception occurred: {str(e)}")
