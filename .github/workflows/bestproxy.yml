@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_dns:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: Checkout Repository
@@ -20,6 +20,7 @@ jobs:
 
     - name: Test IP
       run: |
+        cd ${{ github.workspace }}
         dir
         curl -# https://zip.baipiao.eu.org -o txt.zip
         7za x txt.zip -otxt -y
