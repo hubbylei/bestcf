@@ -2,8 +2,8 @@ name: BestProxy
 
 on:
   workflow_dispatch:
-  # schedule:
-    # - cron: '*/10 * * * *'
+  schedule:
+    - cron: '*/10 * * * *'
 
 jobs:
   update_dns:
@@ -22,11 +22,13 @@ jobs:
       shell: cmd
       run: |
         cd ${{ github.workspace }}
-        .\curl.exe -# https://zip.baipiao.eu.org -o txt.zip
-        .\7za.exe x txt.zip -otxt -y
-        copy txt\*-1-443.txt ip.txt
         dir
-        .\iptest.exe -file=ip.txt -port=443 -tls=true -max=100 -outfile=result.txt -speedtest=1
+        curl -# https://zip.baipiao.eu.org -o txt.zip
+        7za x txt.zip -otxt -y
+        copy txt\*-1-443.txt txt\ip.txt
+        iptest -file=txt\ip.txt -port=443 -tls=true -max=100 -outfile=result.txt -speedtest=1
+        
+        for /f "skip=1 tokens=1 delims=," %%a in (result.txt) do echo %%a>>ip.txt
 
     - name: Install Dependencies
       run: |
