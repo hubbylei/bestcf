@@ -21,11 +21,11 @@ jobs:
     - name: Test IP
       run: |
         cd ${{ github.workspace }}
-        dir
         .\curl.exe -# https://zip.baipiao.eu.org -o txt.zip
         .\7za.exe x txt.zip -otxt -y
         copy .\txt\*-1-443.txt txt\ip.txt
-        .\iptest.exe -file=.\txt\ip.txt -port=443 -tls=true -max=100 -outfile=result.txt -speedtest=1
+        dir
+        .\iptest.exe -file=txt\ip.txt -port=443 -tls=true -max=100 -outfile=result.txt -speedtest=1
 
     - name: Install Dependencies
       run: |
