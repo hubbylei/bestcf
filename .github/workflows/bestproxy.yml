@@ -24,7 +24,7 @@ jobs:
         7za x txt.zip -otxt -y
         copy txt\*-1-443.txt txt\ip.txt> nul 2>&1
         iptest -file=txt\ip.txt -port=443 -tls=true -max=100 -outfile=result-443.txt -speedtest=1
-        for /f "skip=1 tokens=1 delims=," %%a in (result-443.txt) do echo %%a>>ip.txt
+        for /f "skip=1 tokens=1 delims=," %%a in (result-443.txt) do ( echo %%a>>ip.txt)
 
     - name: Install Dependencies
       run: |
