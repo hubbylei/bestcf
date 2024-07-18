@@ -20,7 +20,7 @@ jobs:
 
     - name: Test IP
       run: |
-        cd /d ${{ github.workspace }}
+        cd ${{ github.workspace }}
         .\curl.exe -# https://zip.baipiao.eu.org -o txt.zip
         .\7za.exe x txt.zip -otxt -y
         copy txt\*-1-443.txt ip.txt
