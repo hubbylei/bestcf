@@ -20,7 +20,6 @@ jobs:
 
     - name: Test IP
       run: |
-        chmod a+x ./CloudflareST
         ./CloudflareST -n 500 -sl 5 -tl 600 -tp 443 -tlr 0 -p 0 -dn 5 -f bestproxy.txt -url https://${{ secrets.TEST_URL }} -o result-443.txt
         cat result-443.txt
         awk -F "," 'NR==2 {print $1}' result-443.txt > ip.txt
