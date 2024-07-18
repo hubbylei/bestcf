@@ -3,11 +3,11 @@ name: BestProxy
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   update_dns:
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
     - name: Checkout Repository
@@ -22,12 +22,10 @@ jobs:
       shell: cmd
       run: |
         cd ${{ github.workspace }}
-        dir
-        curl -# https://zip.baipiao.eu.org -o txt.zip
+        curl -L https://zip.baipiao.eu.org -o txt.zip
         7za x txt.zip -otxt -y
         copy txt\*-1-443.txt txt\ip.txt
         iptest -file=txt\ip.txt -port=443 -tls=true -max=100 -outfile=result.txt -speedtest=1
-        
         for /f "skip=1 tokens=1 delims=," %%a in (result.txt) do echo %%a>>ip.txt
 
     - name: Install Dependencies
