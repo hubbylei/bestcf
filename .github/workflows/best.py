@@ -20,7 +20,7 @@ def delete_and_push_dns_records(ips):
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
-    url = f"https://api.cloudflare.com/client/v4/zones/{ZONE_ID}/dns_records?type=A&name=best"
+    url = f"https://api.cloudflare.com/client/v4/zones/{ZONE_ID}/dns_records?name=best.{ZONE_NAME}"
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
