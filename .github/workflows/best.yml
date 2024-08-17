@@ -1,4 +1,4 @@
-name: Area DNS
+name: Best DNS
 
 on:
   workflow_dispatch:
