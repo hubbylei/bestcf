@@ -20,7 +20,7 @@ def delete_and_push_dns_records(ips):
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
-    url = f"https://api.cloudflare.com/client/v4/zones/{ZONE_ID}/dns_records?type=A&name=best.{ZONE_NAME}"
+    url = f"https://api.cloudflare.com/client/v4/zones/{ZONE_ID}/dns_records?type=A&name=best"
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -37,7 +37,7 @@ def delete_and_push_dns_records(ips):
         try:
             data = {
                 "type": "A",
-                "name": f"best.{ZONE_NAME}",
+                "name": "best",
                 "content": ip,
                 "ttl": 60,
                 "proxied": False
@@ -67,11 +67,9 @@ def delete_dns_record(record_id):
 
 def main():
     domain = "jiasu.057150.xyz"
-
     print("Scanning proxy IP from various countries...")
     ips = get_a_record(domain)
     delete_and_push_dns_records(ips)
-
     print("DNS records update complete.")
 
 if __name__ == "__main__":
