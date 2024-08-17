@@ -14,7 +14,7 @@ def get_a_record(domain):
     data = response.json()
     return [record['data'] for record in data.get('Answer', []) if record.get('type') == 1]
 
-def delete_and_push_dns_record(ips):
+def delete_and_push_dns_records(ips):
     
     headers = {
         "Authorization": f"Bearer {API_KEY}",
