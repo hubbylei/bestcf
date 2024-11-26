@@ -18,23 +18,19 @@ def batch_get_country_codes(ips):
     results = []
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
-        for i in range(0, len(ips), 99):
-            batch_ips = ips[i:i+99]
-            url = "http://ip-api.com/batch"
-            payload = [{"query": ip} for ip in batch_ips]
-            futures.append(executor.submit(requests.post, url, json=payload))
-        
+        for ip in ips:
+            url = f"https://ipwho.is/{ip}"
+            futures.append(executor.submit(requests.get, url))
         for future in as_completed(futures):
             try:
                 response = future.result()
                 data = response.json()
-                results.extend(data)
+                results.extend([data])
             except Exception:
-                pass  # 忽略错误
-
+                pass
     for item in results:
-        ip = item['query']
-        country_code = item.get('countryCode', 'Unknown')
+        ip=item.get('ip')
+        country_code = item.get('country_code', 'Unknown')
         yield country_code
 
 def get_country_ip_map(domains):
