@@ -9,7 +9,7 @@ ZONE_ID = os.environ.get("CLOUDFLARE_ZONE_ID")
 ZONE_NAME = os.environ.get("CLOUDFLARE_ZONE_NAME")
 
 def get_a_records(domain):
-    url = f"https://doh.360.cn/resolve?name={domain}&type=A"
+    url = f"https://dns.google/resolve?name={domain}&type=A"
     response = requests.get(url)
     data = response.json()
     return [record['data'] for record in data.get('Answer', []) if record.get('type') == 1]
