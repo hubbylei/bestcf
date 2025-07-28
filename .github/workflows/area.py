@@ -19,7 +19,7 @@ def batch_get_country_codes(ips):
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for ip in ips:
-            url = f"https://ipwho.is/{ip}"
+            url = f"http://ip-api.com/json/{ip}"
             futures.append(executor.submit(requests.get, url))
         for future in as_completed(futures):
             try:
@@ -29,8 +29,8 @@ def batch_get_country_codes(ips):
             except Exception:
                 pass
     for item in results:
-        ip=item.get('ip')
-        country_code = item.get('country_code', 'Unknown')
+        ip=item.get('query')
+        country_code = item.get('countryCode', 'Unknown')
         yield country_code
 
 def get_country_ip_map(domains):
