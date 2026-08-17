@@ -1,17 +1,10 @@
-
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-  <head>
-    <title>503 first byte timeout</title>
-  </head>
-  <body>
-    <h1>Error 503 first byte timeout</h1>
-    <p>first byte timeout</p>
-    <h3>Error 54113</h3>
-    <p>Details: cache-iad-kiad7000063-IAD 1786978864 4251074867</p>
-    <hr>
-    <p>Varnish cache server</p>
-  </body>
-</html>
+8.212.14.90
+47.57.245.232
+8.212.65.162
+8.217.168.149
+8.218.70.238
+8.212.12.98
+47.242.218.87
+8.219.245.214
+8.219.255.49
+8.219.243.132
